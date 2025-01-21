@@ -1,129 +1,74 @@
-DODO Platform Actions Documentation
+CREATE_TOKEN
 
-## CREATE_TOKEN
+    **Description:** Create and deploy new tokens through DODO platform, supporting customizable token parameters such as supply, name, symbol, decimal places, burn mechanism, trading fees and supply increase option
 
-### Description
-Create and deploy new tokens through the DODO platform, supporting customizable token parameters such as:
-- Supply
-- Name
-- Symbol
-- Decimal places
-- Burn mechanism
-- Trading fees
-- Supply increase (mintable) option
+    **Keywords:** create token on dodo, deploy token dodo, mint new token, launch token, create cryptocurrency, token creation dodo, issue token, deploy smart contract, create erc20, create bep20, token generator, dodo token deploy, new token launch, token deployment, custom token creation, create digital currency, token minting, smart token creation, token issuance dodo, launch cryptocurrency, generate token, create token contract, token creation platform, token launch dodo, deploy new token
 
-### Keywords
-create token on dodo, deploy token dodo, mint new token, launch token, create cryptocurrency, token creation dodo, issue token, deploy smart contract, create erc20, create bep20, token generator, dodo token deploy, new token launch, token deployment, custom token creation, create digital currency, token minting, smart token creation, token issuance dodo, launch cryptocurrency, generate token, create token contract, token creation platform, token launch dodo, deploy new token
-
-### Action
-```json
-{
-  "action": "CREATE_TOKEN",
-  "network": "1",
-  "inputs": [
-    { "name": "tokenSymbol", "type": "string", "default": "" },
-    { "name": "tokenSupply", "type": "number", "default": "1_000_000_000" },
-    { "name": "tokenName", "type": "string", "default": "" },
-    { "name": "tokenDecimal", "type": "number", "default": "18" },
-    { "name": "burnRate", "type": "number", "default": "0" },
-    { "name": "tradingFees", "type": "number", "default": "0" },
-    { "name": "mintAble", "type": "boolean", "default": "false" },
-    { "name": "devBuy", "type": "number", "default": "0" }
-  ],
-  "outputs": [
-    { "name": "mintAddress", "type": "string" }
-  ],
-  "protocol": {
-    "DODO_Mintable": {
-      "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
-      "function": "createCustomMintableERC20"
-    },
-    "DODO_Std": {
-      "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
-      "function": "createStdERC20"
-    },
-    "DODO_Custom": {
-      "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
-      "function": "createCustomERC20"
-    }
-  }
-}
-```
-
-### Protocol Logic
-- If `mintAble` is `true` → Use `createCustomMintableERC20`
-- If `burnRate` or `tradingFees` is `true` → Use `createCustomERC20`
-- If all are `false` → Use `createStdERC20`
-
----
-
-## SWAP_TOKEN
-
-### Description
-Exchange tokens using decentralized exchanges (DEX) and aggregators. Supports:
-- Multi-chain swaps
-- Best route finding
-- Optimal slippage settings
-- Price impact calculations
-- MEV protection
-
-### Keywords
-swap tokens, exchange crypto, trade tokens, token swap, dex swap, swap eth, swap cryptocurrency, exchange tokens, crypto swap, swap coins, token exchange, trade cryptocurrency, swap digital assets, dex trade, token trading, swap crypto assets, exchange pairs, swap trading pairs, defi swap, token conversion, swap on uniswap, pancakeswap exchange, sushiswap trade, trade on dex, best rate swap
-
-### Action
-```json
-{
-  "action": "SWAP_TOKEN",
-  "network": "1",
-  "inputs": [
-    { "name": "inputToken", "type": "string", "default": "" },
-    { "name": "inputNetwork", "type": "string", "default": "" },
-    { "name": "outputToken", "type": "string", "default": "" },
-    { "name": "outputNetwork", "type": "string", "default": "" },
-    { "name": "amount", "type": "string", "default": "" },
-    { "name": "slippage", "type": "string", "default": "" },
-    { "name": "prioritizationFee", "type": "string", "default": "" }
-  ],
-  "outputs": [
-    { "name": "success", "type": "boolean" }
-  ],
-  "protocol": {
-    "name": "uniswap",
-    "quote": "https://interface.gateway.uniswap.org/v2/quote"
-  }
-}
-```
-
----
-
-## BRIDGE
-
-### Description
-Transfer tokens between different blockchain networks using cross-chain bridge protocols. Supports:
-- Multiple token types (ERC20, NFTs)
-- Various chains (Ethereum, BSC, Polygon, etc.)
-
-### Keywords
-bridge tokens, cross chain transfer, bridge crypto, token bridge, cross chain bridge, bridge eth, bridge bnb, bridge assets, blockchain bridge, bridge cryptocurrency, bridge to polygon, bridge to bsc, cross chain swap, bridge to arbitrum, bridge to optimism, bridge to l2, chain transfer, bridge digital assets, cross chain movement, bridge wallet, token bridging, bridge network transfer, bridge to mainnet, bridge coins, network bridge
-
-### Action
-```json
-{
-  "action": "BRIDGE",
-  "network": "1",
-  "inputs": [
-    { "name": "inputToken", "type": "string", "default": "" },
-    { "name": "inputNetwork", "type": "string", "default": "" },
-    { "name": "outputToken", "type": "string", "default": "" },
-    { "name": "outputNetwork", "type": "string", "default": "" },
-    { "name": "amount", "type": "string", "default": "" },
-    { "name": "toAddress", "type": "string", "default": "" }
-  ],
-  "outputs": [
-    { "name": "success", "type": "boolean" }
-  ],
-  "protocol": {
-    "name": "LAYERSWAP",
-    "quote": "https://api.layerswap.io/api/v2/swaps"
-  }
-}
+    ```tsx
+    {
+                "action": "CREATE_TOKEN",
+                "network": "1",
+                "inputs": [
+                    {
+                        "name": "tokenSymbol",
+                        "type": "string",
+                        "default": ""
+                    },
+                    {
+                        "name": "tokenSupply",
+                        "type": "number",
+                        "default": "1_000_000_000"
+                    },
+                    {
+                        "name": "tokenName",
+                        "type": "string",
+                        "default": ""
+                    },
+                    {
+                        "name": "tokenDecimal",
+                        "type": "number",
+                        "default": "18"
+                    },
+                    {
+                        "name": "burnRate",
+                        "type": "number",
+                        "default": "0"
+                    },
+                    {
+                        "name": "tradingFees",
+                        "type": "number",
+                        "default": "0"
+                    },
+                    {
+                        "name": "mintAble",
+                        "type": "boolean",
+                        "default": "false"
+                    },
+                    {
+                        "name": "devBuy",
+                        "type": "number",
+                        "default": "0"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "mintAddress",
+                        "type": "string"
+                    }
+                ],
+                "protocol": {
+                    "DODO_Mintable": {
+                        "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
+                        "function": "createCustomMintableERC20"
+                    }, //use this contract and function when the mintAble is true
+                    "DODO_Std": {
+                        "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
+                        "function": "createStdERC20"
+                    }, //use this contract and function when the mintAble is true & tradingFees is 0 & burnRate is 0
+                    "DODO_Custom": {
+                        "contract": "0x7466C6FE28180c33e2a35989FD6833C8dD5A7E16",
+                        "function": "createCustomERC20"
+                    }
+                } // if mintable is ture --> "createCustomMintableERC20";if burn or tradingfees is ture --> "createCustomERC20" ; if all is fulse --> "createStdERC20"//
+            },
+    ```
