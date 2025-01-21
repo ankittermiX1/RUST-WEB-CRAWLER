@@ -1,4 +1,6 @@
-CREATE_TOKEN
+# DeFAI Protocol
+
+- CREATE_TOKEN
 
     **Description:** Create and deploy new tokens through DODO platform, supporting customizable token parameters such as supply, name, symbol, decimal places, burn mechanism, trading fees and supply increase option
 
